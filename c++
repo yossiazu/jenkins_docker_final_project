@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>This is the file test.c++</h1>
+<h1>This is the file c++</h1>
 <p>hello from c++.</p>
 
 </body>
