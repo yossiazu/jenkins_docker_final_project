@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    stages {
+        stage('GITHUB') {
+            steps {
+                git url: 'git@github.com:yossiazu/t1.git', branch: 'main'
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
+        stage('look fo the file') {
+            steps{
+                sh'''
+                if [ $file = "all" ]; then
+                  cp all /home/yossiazu/docker_prac/proj/index.html
+                elif [ $file = "java" ]; then
+                   cp java /home/yossiazu/docker_prac/proj/index.html
+                elif [ $file = "python" ]; then
+                   cp python /home/yossiazu/docker_prac/proj/index.html
+                elif [ $file = "c" ]; then
+                   cp c /home/yossiazu/docker_prac/proj/index.html
+                fi
+                cd /home/yossiazu/docker_prac/proj/
+                docker build -t my-apache2 .
+                docker run -dit --name my-running-app -p 8889:80 my-apache2
+                '''
+            }
+        }
+    }
+    post {
+        success {
+            mail to: "yossi1999azu@gmail.com",
+                 subject: "the build was successful",
+                 body: "the selected language is: $file"
+        }
+    }
+}
