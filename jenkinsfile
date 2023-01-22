@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('GITHUB') {
             steps {
-                git url: 'git@github.com:yossiazu/t1.git', branch: 'main'
+                git url: 'https://github.com/yossiazu/t1.git', branch: 'main'
                 sh 'pwd'
                 sh 'ls -la'
             }
