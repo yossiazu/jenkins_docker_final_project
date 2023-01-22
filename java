@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>This is the file test.j</h1>
+<h1>This is the file java</h1>
 <p>hello from java.</p>
 
 </body>
