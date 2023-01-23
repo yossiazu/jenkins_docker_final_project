@@ -10,20 +10,21 @@ pipeline {
         }
         stage('look fo the file') {
             steps{
+                 
                 sh'''
                 if [ $file = "all" ]; then
-                  cp all /home/yossiazu/docker_prac/proj/index.html
+                  cp all index.html
                 elif [ $file = "java" ]; then
-                   cp java /home/yossiazu/docker_prac/proj/index.html
+                   cp java index.html
                 elif [ $file = "python" ]; then
-                   cp python /home/yossiazu/docker_prac/proj/index.html
+                   cp python index.html
                 elif [ $file = "c" ]; then
-                   cp c /home/yossiazu/docker_prac/proj/index.html
+                   cp c index.html
                 fi
-                cd /home/yossiazu/docker_prac/proj/
                 docker build -t my-apache2 .
-                docker run -dit --name my-running-app -p 8889:80 my-apache2
+                docker run -dit --name $con_name -p 9889:80 my-apache2
                 '''
+                
             }
         }
     }
