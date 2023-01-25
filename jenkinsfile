@@ -38,7 +38,7 @@ pipeline {
         success {
             mail to: "yossi1999azu@gmail.com",
                 subject: "the build was successful",
-                body: "the selected language is: $file"
+                body: "the selected language is: ${file_name}"
         }
         failure {
             mail to: "yossi1999azu@gmail.com",
