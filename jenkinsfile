@@ -1,9 +1,9 @@
 pipeline {
     agent any
     parameters { 
-       choice(name: 'file_name', choices: ['all', 'c', 'java', 'python'], description: 'Select the file you want to execute')
-       string(name: 'con_name', defaultValue: 'project', description: 'Name of the container')
-       string(name: 'port', defaultValue: '8998', description: 'Port to map the container')
+        choice(name: "file_name", choices: ["all", "c", "java", "python"], description: "Select the file you want to execute")
+        string(name: "con_name", defaultValue: "project", description: "Name of the container")
+        string(name: "port", defaultValue: "8998", description: "Port to map the container")
     }
     stages {
         stage('GITHUB') {
@@ -15,38 +15,35 @@ pipeline {
         }
         stage('look fo the file') {
             steps{ 
-             script {
-                  int_port = "${params.port}".toInteger()
-                }
                 sh'''
-                if [ "${params.file_name}" = "all" ]; then
-                  cp all index.html
-                elif [ "${params.file_name}" = java ]; then
-                   cp java index.html
-                elif [ "${params.file_name}" = "python" ]; then
-                   cp python index.html
-                elif [ "${params.file_name}"= "c" ]; then
-                   cp c index.html
+                if [ $file_name = "all" ]; then
+                    cp all index.html
+                elif [ $file_name = "java" ]; then
+                    cp java index.html
+                elif [ file_name = "python" ]; then
+                    cp python index.html
+                elif [ file_name = "c" ]; then
+                    cp c index.html
                 else
-                  echo "Invalid file selected"
-                  exit 1
+                    echo "Invalid file selected"
+                    exit 1
                 fi
                 docker build -t my-apache2 .
-                docker run -dit --name $params.con_name -p ${int.port}:80 my-apache2
+                docker run -dit --name $con_name -p $port:80 my-apache2
                 '''
-               }
-           }
+            }
+        }
     }
-    post {
+    post{
         success {
             mail to: "yossi1999azu@gmail.com",
-                 subject: "the build was successful",
-                 body: "the selected language is: $file"
-                 }
+                subject: "the build was successful",
+                body: "the selected language is: $file"
+        }
         failure {
-            mail to: "yossiazulay@gmail.com",
+            mail to: "yossi1999azu@gmail.com",
                 subject: "the build failed",
                 body: "The pipeline ${currentBuild.fullDisplayName} has failed. Check the logs for more information."      
-                }
         }
+    }
 }
