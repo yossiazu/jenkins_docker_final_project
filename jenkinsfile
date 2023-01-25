@@ -15,6 +15,9 @@ pipeline {
         }
         stage('look fo the file') {
             steps{ 
+             script {
+                  int_port = "${params.port}".toInteger()
+                }
                 sh'''
                 if [ "${params.file_name}" = "all" ]; then
                   cp all index.html
@@ -29,7 +32,7 @@ pipeline {
                   exit 1
                 fi
                 docker build -t my-apache2 .
-                docker run -dit --name $params.con_name -p ${params.port}:80 my-apache2
+                docker run -dit --name $params.con_name -p ${int.port}:80 my-apache2
                 '''
                 
             }
@@ -45,7 +48,7 @@ pipeline {
             mail to: "yossiazulay@gmail.com",
                 subject: "the build failed",
                 body: "The pipeline ${currentBuild.fullDisplayName} has failed. Check the logs for more information."      
-           
+                }
         }
     }
 }
