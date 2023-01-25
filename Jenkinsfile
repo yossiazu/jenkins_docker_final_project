@@ -37,12 +37,12 @@ pipeline {
     }
     post{
         success {
-            mail to: ${email_address},
+            mail to: "${email_address}",
                 subject: "the build was successful",
                 body: "the selected language is: ${file_name}"
         }
         failure {
-            mail to: ${email_address},
+            mail to: "${email_address}",
                 subject: "the build failed",
                 body: "The pipeline ${currentBuild.fullDisplayName} has failed. Check the logs for more information."      
         }
