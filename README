@@ -1,1 +1,0 @@
-#It is important for the program to work, to configure this on the server before running: sudo chmod 666 /var/run/docker.sock
