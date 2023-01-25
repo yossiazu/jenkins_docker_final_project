@@ -20,9 +20,9 @@ pipeline {
                     cp all index.html
                 elif [ $file_name = "java" ]; then
                     cp java index.html
-                elif [ file_name = "python" ]; then
+                elif [ $file_name = "python" ]; then
                     cp python index.html
-                elif [ file_name = "c" ]; then
+                elif [ $file_name = "c" ]; then
                     cp c index.html
                 else
                     echo "Invalid file selected"
