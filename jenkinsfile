@@ -34,9 +34,8 @@ pipeline {
                 docker build -t my-apache2 .
                 docker run -dit --name $params.con_name -p ${int.port}:80 my-apache2
                 '''
-                
-            }
-        }
+               }
+           }
     }
     post {
         success {
@@ -50,5 +49,4 @@ pipeline {
                 body: "The pipeline ${currentBuild.fullDisplayName} has failed. Check the logs for more information."      
                 }
         }
-    }
 }
