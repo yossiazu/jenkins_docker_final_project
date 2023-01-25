@@ -24,6 +24,9 @@ pipeline {
                    cp python index.html
                 elif [ "$params.file_name" = "c" ]; then
                    cp c index.html
+                else
+                  echo "Invalid file selected"
+                  exit 1
                 fi
                 docker build -t my-apache2 .
                 docker run -dit --name $params.con_name -p ${params.port}:80 my-apache2
