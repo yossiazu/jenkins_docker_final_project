@@ -4,6 +4,7 @@ pipeline {
         choice(name: "file_name", choices: ["all", "c", "java", "python"], description: "Select the file you want to execute")
         string(name: "con_name", defaultValue: "project", description: "Name of the container")
         string(name: "port", defaultValue: "8998", description: "Port to map the container")
+        string(name: "email_address", defaultValue: "yossi1999azu@gmail.com", description: "enter your email adddress")
     }
     stages {
         stage('GITHUB') {
@@ -36,12 +37,12 @@ pipeline {
     }
     post{
         success {
-            mail to: "yossi1999azu@gmail.com",
+            mail to: ${email_address},
                 subject: "the build was successful",
                 body: "the selected language is: ${file_name}"
         }
         failure {
-            mail to: "yossi1999azu@gmail.com",
+            mail to: ${email_address},
                 subject: "the build failed",
                 body: "The pipeline ${currentBuild.fullDisplayName} has failed. Check the logs for more information."      
         }
