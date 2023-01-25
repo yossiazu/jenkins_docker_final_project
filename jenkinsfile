@@ -1,7 +1,9 @@
 pipeline {
     agent any
     parameters { 
-     choice(name: 'file_name', choices: ['all', 'c', 'java', 'python'], description: 'Select the file you want to execute')
+       choice(name: 'file_name', choices: ['all', 'c', 'java', 'python'], description: 'Select the file you want to execute')
+       string(name: 'con_name', defaultValue: 'project', description: 'Name of the container')
+       string(name: 'port', defaultValue: '8998', description: 'Port to map the container')
     }
     stages {
         stage('GITHUB') {
