@@ -3,7 +3,7 @@ pipeline {
     parameters { 
        choice(name: 'file_name', choices: ['all', 'c', 'java', 'python'], description: 'Select the file you want to execute')
        string(name: 'con_name', defaultValue: 'project', description: 'Name of the container')
-       int(name: 'port', defaultValue: 8998, description: 'Port to map the container')
+       string(name: 'port', defaultValue: '8998', description: 'Port to map the container')
     }
     stages {
         stage('GITHUB') {
@@ -26,7 +26,7 @@ pipeline {
                    cp c index.html
                 fi
                 docker build -t my-apache2 .
-                docker run -dit --name $params.con_name -p $params.port:80 my-apache2
+                docker run -dit --name $params.con_name -p ${params.port}:80 my-apache2
                 '''
                 
             }
@@ -37,6 +37,12 @@ pipeline {
             mail to: "yossi1999azu@gmail.com",
                  subject: "the build was successful",
                  body: "the selected language is: $file"
+                 }
+        failure {
+            mail to: "yossiazulay@gmail.com",
+                subject: "the build failed",
+                body: "The pipeline ${currentBuild.fullDisplayName} has failed. Check the logs for more information."      
+           
         }
     }
 }
