@@ -16,13 +16,13 @@ pipeline {
         stage('look fo the file') {
             steps{ 
                 sh'''
-                if [ $params.file_name = "all" ]; then
+                if [ "${params.file_name}" = "all" ]; then
                   cp all index.html
-                elif [ $params.file_name = java ]; then
+                elif [ "${params.file_name}" = java ]; then
                    cp java index.html
-                elif [ $params.file_name = "python" ]; then
+                elif [ "${params.file_name}" = "python" ]; then
                    cp python index.html
-                elif [ $params.file_name = "c" ]; then
+                elif [ "${params.file_name}"= "c" ]; then
                    cp c index.html
                 else
                   echo "Invalid file selected"
