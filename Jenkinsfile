@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('GITHUB') {
             steps {
-                git url: 'https://github.com/yossiazu/t1.git', branch: 'main'
+                git url: 'https://github.com/yossiazu/jenkins_docker_final_project.git', branch: 'main'
                 sh 'pwd'
                 sh 'ls -la'
             }
