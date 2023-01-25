@@ -28,7 +28,6 @@ pipeline {
                     echo "Invalid file selected"
                     exit 1
                 fi
-                echo  | sudo -S chmod 666 /var/run/docker.sock
                 docker build -t my-apache2 .
                 docker run -dit --name $con_name -p $port:80 my-apache2
                 '''
