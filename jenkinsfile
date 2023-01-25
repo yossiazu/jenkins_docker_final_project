@@ -26,7 +26,7 @@ pipeline {
                    cp c index.html
                 fi
                 docker build -t my-apache2 .
-                docker run -dit --name $con_name -p $port:80 my-apache2
+                docker run -dit --name $params.con_name -p $params.port:80 my-apache2
                 '''
                 
             }
