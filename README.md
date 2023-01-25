@@ -1,4 +1,4 @@
-# jenkins_docker_final_project
+# jenkins_docker_project
 the final project involves the use of Jenkins and Docker. The project includes a Jenkins file, 
 which prompts the user to enter the name of a file. Once the user enters the file name, Jenkins 
 creates a container using the Docker image of Apache HTTP Server (httpd) and configures the file 
